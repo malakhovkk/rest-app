@@ -1,0 +1,18 @@
+.edit
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+
+}
+
+.edit_icon
+{
+    margin-top:10px;
+    cursor: pointer;
+}
+.add
+{
+    cursor: pointer;
+}
