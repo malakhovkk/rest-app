@@ -25,11 +25,16 @@ export default function Edit({elem, setPopUpEdit, setResult}) {
         let res =  await access_all(id);
         setResult(res);
     }
-    let arr = ['type_id', 'orig_name','pwd', 'info','prop','id','status'];
+    let arr = ['orig_name','pwd', 'info','prop'];
     return (
         <div class={styles.container}>
       <form onSubmit={(e) => edit_client(e)} className={styles.forma}>
-      
+      <select value={info.type_id} onChange={(e) => setInfo({...info, type_id:e.target.value})}>
+            <option value="tRexMQ">tRexMQ</option>
+            <option value="tConfig">tConfig</option>
+            <option value="tDevice">tDevice</option>
+            <option value="tAdmin">tAdmin</option>
+          </select>
       {arr.map(el =>  <TextField style={{width:"300px"}}  id="standard-basic" label={el} variant="standard"  value={info[el]} onChange={(e) => setInfo({...info, [el]:e.target.value})} type="text"/>)}
         
           <Button type="submit" style={{marginTop:"40px",marginBottom:"20px" }}  variant="contained">Сохранить</Button>
