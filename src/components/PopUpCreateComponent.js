@@ -41,7 +41,7 @@ export default function PopUpCreateComponent({setPopUpCreate, setResult}) {
           <TextField style={{width:"300px"}} id="standard-basic" label="ws_url" variant="standard"   value={info.ws_url} onChange={(e) => setInfo({...info, ws_url:e.target.value})} type="text"/>
           <TextField style={{width:"300px"}} id="standard-basic" label="info" variant="standard"   value={info.info} onChange={(e) => setInfo({...info, info:e.target.value})} type="text"/>
           <TextField style={{width:"300px"}} id="standard-basic" label="params" variant="standard"   value={info.params} onChange={(e) => setInfo({...info, params:e.target.value})} type="text"/> 
-          <Button  type="submit" style={{marginTop:"40px",marginBottom:"20px" }}  className={styles.submit1} variant="contained">OK</Button>
+          <Button  type="submit" style={{marginTop:"40px",marginBottom:"20px" }}   variant="contained">OK</Button>
           <Button onClick={() => setPopUpCreate(false)} variant="contained" color="error">
     Закрыть
     </Button>
