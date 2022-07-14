@@ -26,8 +26,8 @@ export default function Edit({elem, setPopUpEdit, setResult}) {
     }
     let arr = ['type_id', 'orig_name','pwd', 'info','prop','id','status'];
     return (
-        <div class={styles.container}>
-      <form onSubmit={(e) => edit_client(e)} className={styles.forma}>
+        <div>
+      <form onSubmit={(e) => edit_client(e)} >
       
       {arr.map(el =>  <TextField style={{width:"300px"}}  id="standard-basic" label={el} variant="standard"  value={info[el]} onChange={(e) => setInfo({...info, [el]:e.target.value})} type="text"/>)}
         
