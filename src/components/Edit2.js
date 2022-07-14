@@ -2,6 +2,7 @@ import { useState } from "react";
 import { update_access } from "../api/update_access";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import styles from './PopUpCreate.module.css';
 import {access_all} from '../api/access_all';
 import { useNavigate } from 'react-router-dom';
 
@@ -26,8 +27,8 @@ export default function Edit({elem, setPopUpEdit, setResult}) {
     }
     let arr = ['type_id', 'orig_name','pwd', 'info','prop','id','status'];
     return (
-        <div>
-      <form onSubmit={(e) => edit_client(e)} >
+        <div class={styles.container}>
+      <form onSubmit={(e) => edit_client(e)} className={styles.forma}>
       
       {arr.map(el =>  <TextField style={{width:"300px"}}  id="standard-basic" label={el} variant="standard"  value={info[el]} onChange={(e) => setInfo({...info, [el]:e.target.value})} type="text"/>)}
         
