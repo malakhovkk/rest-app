@@ -8,13 +8,15 @@ import axios from 'axios'
 //     return res;
 // }
 
-async function add_access(props, id)
+async function update_access(props)
 {
+    //let token = null;
     console.log(props);
+    let id = props.id;
     // id = convertId(id);
     try{
         const {data} = await axios({
-            method: 'put',
+            method: 'post',
         // url: 'https://81.94.140.200:8081/api/login',
             url:`https://www.re-check.com:8081/api/v1/access/${id}`,
             headers: {
@@ -33,4 +35,4 @@ async function add_access(props, id)
     }
     
 }
-export {add_access}
+export {update_access}

@@ -1,46 +1,39 @@
 import { useState } from "react";
+import { update_access } from "../api/update_access";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import styles from './PopUpCreate.module.css';
-import {clients} from '../api/clients';
-import {add_access} from '../api/add_access';
+import {access_all} from '../api/access_all';
 import { useNavigate } from 'react-router-dom';
 
-export default function Add({setPopUpAdd, setResult, id}) {
+export default function Edit({elem, setPopUpEdit, setResult}) {
+    let id = localStorage.getItem("id");
     let navigate = useNavigate();
     const [info, setInfo] = useState({
-        type_id: "tRexMQ"
+        ...elem
     });
-    
     async function edit_client(e)
     {
         e.preventDefault();
-        let data = await add_access(info, id);
-        setPopUpAdd(false);
-        let res =  await clients();
-        setResult(res);
-        if(res.error)
+        let data = await update_access(info);
+        setPopUpEdit(false);
+        if(data.error)
         {
-                navigate("../login", { replace: true });
+          navigate("../clients", { replace: true });
         }
         console.log(data);
+        let res =  await access_all(id);
+        setResult(res);
     }
-    let arr = ['orig_name', 'access_id','pwd', 'info','prop'];
+    let arr = ['type_id', 'orig_name','pwd', 'info','prop','id','status'];
     return (
         <div class={styles.container}>
       <form onSubmit={(e) => edit_client(e)} className={styles.forma}>
-      <select value={info.type_id} onChange={(e) => setInfo({...info, type_id:e.target.value})}>
-            <option value="tRexMQ">tRexMQ</option>
-            <option value="tConfig">tConfig</option>
-            <option value="tDevice">tDevice</option>
-            <option value="tAdmin">tAdmin</option>
-          </select>
+      
       {arr.map(el =>  <TextField  id="standard-basic" label={el} variant="standard"  value={info[el]} onChange={(e) => setInfo({...info, [el]:e.target.value})} type="text"/>)}
-       {console.log(arr)}
-    
         
           <Button type="submit" className={styles.submit1} variant="contained">Сохранить</Button>
-          <Button onClick={() => setPopUpAdd(false)} variant="contained" color="error">
+          <Button onClick={() => setPopUpEdit(false)} variant="contained" color="error">
     Отменить
     </Button>
       </form>

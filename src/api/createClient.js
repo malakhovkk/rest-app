@@ -3,7 +3,7 @@ import axios from 'axios'
 
 async function createClient(props)
 {
-    let token = null;
+    //let token = null;
     console.log(props);
     try{
         const {data} = await axios({

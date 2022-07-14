@@ -10,7 +10,7 @@ import axios from 'axios'
 
 async function update(props)
 {
-    let token = null;
+    //let token = null;
     console.log(props);
     let id = props.id;
     // id = convertId(id);

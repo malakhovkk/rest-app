@@ -20,7 +20,7 @@ export default function Edit({elem, setPopUpEdit, setResult}) {
         setResult(res);
         if(res.error)
         {
-                navigate("../login", { replace: true });
+          navigate("../login", { replace: true });
         }
         console.log(data);
     }

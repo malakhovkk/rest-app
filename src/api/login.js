@@ -3,7 +3,7 @@ import axios from 'axios'
 
 async function login(name, password)
 {
-    let token = null;
+    //let token = null;
     try{
         const {data} = await axios({
             method: 'post',

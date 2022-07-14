@@ -10,14 +10,16 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
-import styles from './Clients.module.css';
+import styles from './Access.module.css';
 import EditIcon from '@mui/icons-material/Edit';
-import Edit from './Edit';
+import Edit2 from './Edit2';
 import Add from './Add';
 import AddIcon from '@mui/icons-material/Add';
-import { Tab } from '@mui/material';
+import { access_all } from '../api/access_all';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
-function Clients() {
+function Access() {
+    let id = localStorage.getItem("id");
     let navigate = useNavigate();
     const [result, setResult] = useState();
     const [popUpCreate, setPopUpCreate] = useState(false);
@@ -31,7 +33,7 @@ function Clients() {
 
     useEffect(() =>{
         async function func(){
-            let res =  await clients();
+            let res =  await access_all(id);
             if(res.error)
             {
                 navigate("../login", { replace: true });
@@ -63,20 +65,18 @@ function Clients() {
     //         }
     //   </table>
     <>
-    {(Edit_ && PopUpEdit)? <Edit elem={Edit_} setPopUpEdit={setPopUpEdit} setResult={setResult}/> : <></>}
-    {(Add_ && PopUpAdd)? <Add  setPopUpAdd={setPopUpAdd} setResult={setResult} id={Add_.id}/> : <></>}
+    <ArrowBackIosIcon style={{cursor : 'pointer'}} onClick={() =>{
+        navigate("../clients", { replace: true });
+    }}/>
+    {(Edit_ && PopUpEdit)? <Edit2 elem={Edit_} setPopUpEdit={setPopUpEdit} setResult={setResult}/> : <></>}
     {popUpCreate ? <PopUpCreateComponent setPopUpCreate={setPopUpCreate} setResult={setResult}/> : <></>}
-    {popUpCreate ? <></>
-    :<Button onClick={showPopUpCreate} style={{"marginTop":"20px", "marginLeft":"20px"}}variant="contained" color="success">
-    Добавить пользователя
-    </Button>}
+
     <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
                 <TableRow>
                 
                 {Object.keys(result[0]).map((el,i)=><TableCell align="center" key={i}>{el}</TableCell>)}
-                <TableCell>Access</TableCell>
                 </TableRow>
 
             </TableHead>
@@ -84,12 +84,7 @@ function Clients() {
                 
                 {result.map(el=>
                 <TableRow key={el.id}>{Object.keys(result[0]).map(key => <TableCell key={key}>{el[key]}</TableCell>)}
-                <TableCell><button onClick={() => {
-                    localStorage.setItem("id", el.id);
-                    navigate("../access", { replace: true });
-                    }}>Показать</button></TableCell>
                 <div className={styles.edit}> <EditIcon onClick={() => { setPopUpEdit(true); setEdit(el);}} className={styles.edit_icon}/></div>
-                    <AddIcon className={styles.add} onClick={() => {setPopUpAdd(true); setAdd(el);}}/>
                 </TableRow>
                 )}
 
@@ -100,5 +95,5 @@ function Clients() {
     );
 }
 
-export default Clients;
+export default Access;
   
