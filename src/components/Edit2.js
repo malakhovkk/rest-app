@@ -30,9 +30,9 @@ export default function Edit({elem, setPopUpEdit, setResult}) {
         <div class={styles.container}>
       <form onSubmit={(e) => edit_client(e)} className={styles.forma}>
       
-      {arr.map(el =>  <TextField  id="standard-basic" label={el} variant="standard"  value={info[el]} onChange={(e) => setInfo({...info, [el]:e.target.value})} type="text"/>)}
+      {arr.map(el =>  <TextField style={{width:"300px"}}  id="standard-basic" label={el} variant="standard"  value={info[el]} onChange={(e) => setInfo({...info, [el]:e.target.value})} type="text"/>)}
         
-          <Button type="submit" className={styles.submit1} variant="contained">Сохранить</Button>
+          <Button type="submit" style={{marginTop:"40px",marginBottom:"20px" }} className={styles.submit1} variant="contained">Сохранить</Button>
           <Button onClick={() => setPopUpEdit(false)} variant="contained" color="error">
     Отменить
     </Button>
