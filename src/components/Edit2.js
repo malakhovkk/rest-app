@@ -2,7 +2,6 @@ import { useState } from "react";
 import { update_access } from "../api/update_access";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import styles from './PopUpCreate.module.css';
 import {access_all} from '../api/access_all';
 import { useNavigate } from 'react-router-dom';
 
@@ -32,7 +31,7 @@ export default function Edit({elem, setPopUpEdit, setResult}) {
       
       {arr.map(el =>  <TextField style={{width:"300px"}}  id="standard-basic" label={el} variant="standard"  value={info[el]} onChange={(e) => setInfo({...info, [el]:e.target.value})} type="text"/>)}
         
-          <Button type="submit" style={{marginTop:"40px",marginBottom:"20px" }} className={styles.submit1} variant="contained">Сохранить</Button>
+          <Button type="submit" style={{marginTop:"40px",marginBottom:"20px" }}  variant="contained">Сохранить</Button>
           <Button onClick={() => setPopUpEdit(false)} variant="contained" color="error">
     Отменить
     </Button>
