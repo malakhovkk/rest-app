@@ -27,7 +27,7 @@ async function access_all(id)
     }
     catch(err)
     {
-        console.log(err);
+        return  {error:err};
     }
     
 }
