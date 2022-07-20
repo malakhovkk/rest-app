@@ -29,7 +29,7 @@ async function add_access(props, id)
     }
     catch(err)
     {
-        console.log(err);
+        return  {error:err};
     }
     
 }

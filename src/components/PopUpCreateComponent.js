@@ -28,7 +28,6 @@ export default function PopUpCreateComponent({setPopUpCreate, setResult}) {
         {
                 navigate("../login", { replace: true });
         }
-        console.log(data);
     }
 
     return (

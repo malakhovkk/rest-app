@@ -21,7 +21,6 @@ export default function Edit({elem, setPopUpEdit, setResult}) {
         {
           navigate("../clients", { replace: true });
         }
-        console.log(data);
         let res =  await access_all(id);
         setResult(res);
     }

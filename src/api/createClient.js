@@ -22,7 +22,7 @@ async function createClient(props)
     }
     catch(err)
     {
-        console.log(err);
+        return  {error:err};
     }
     
 }

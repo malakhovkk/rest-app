@@ -16,3 +16,29 @@
 {
     cursor: pointer;
 }
+.list
+{
+    font-family: "Gill Sans", sans-serif;
+    font-size: 30px;
+    margin-left:30px; 
+}
+.top
+{
+    position: fixed;
+    top:0;
+    left:0;
+    background-color: white;
+    width:100vw;
+}
+.bigtable
+{
+    margin-top: 150px;
+}
+.bigtable2
+{
+
+}
+.row:hover
+{
+    background-color: aquamarine;
+}

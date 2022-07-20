@@ -16,6 +16,7 @@ import Edit from './Edit';
 import Add from './Add';
 import AddIcon from '@mui/icons-material/Add';
 import { Tab } from '@mui/material';
+import moment from 'moment';
 
 function Clients() {
     let navigate = useNavigate();
@@ -48,12 +49,16 @@ function Clients() {
             //     }
             //     setInfo(title);
             // }
-            console.log(res);
+            // console.log(res);
             setResult(res);
         }
         func();
     },[]);
-    console.log(result);
+    let style;
+    if(!popUpCreate) style = styles.bigtable;
+    else style = styles.bigtable2;
+    // console.log(result);
+    // result[0].status = 0;
     return result && (
     //   <table> <tr>{Object.keys(result[0]).map((el,i)=><th key={i}>{el}</th>)}</tr>
     //         {result.map(el=>
@@ -67,15 +72,19 @@ function Clients() {
     {(Add_ && PopUpAdd)? <Add  setPopUpAdd={setPopUpAdd} setResult={setResult} id={Add_.id}/> : <></>}
     {popUpCreate ? <PopUpCreateComponent setPopUpCreate={setPopUpCreate} setResult={setResult}/> : <></>}
     {popUpCreate ? <></>
-    :<Button onClick={showPopUpCreate} style={{marginTop:"20px", marginLeft:"20px"}} variant="contained" color="success">
+    :<div className={styles.top}><Button onClick={showPopUpCreate} style={{marginTop:"20px", marginLeft:"20px"}} variant="contained" color="success">
     Добавить пользователя
-    </Button>}
-    <TableContainer component={Paper}>
+    </Button>
+    <h2 className={styles.list}>
+        Список пользователей:
+    </h2></div>
+    }
+    <TableContainer  className={style} component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
                 <TableRow>
                 
-                {Object.keys(result[0]).map((el,i)=><TableCell align="center" key={i}>{el}</TableCell>)}
+                {['id', 'base_name', 'cname', 'url', 'info', 'ws_url', 'params', 'reg_date'].map((el,i)=><TableCell align="center" key={i}>{el}</TableCell>)}
                 <TableCell>Access</TableCell>
                 </TableRow>
 
@@ -83,7 +92,11 @@ function Clients() {
             <TableBody>
                 
                 {result.map(el=>
-                <TableRow key={el.id}>{Object.keys(result[0]).map(key => <TableCell key={key}>{el[key]}</TableCell>)}
+                <TableRow className={styles.row} key={el.id}>
+                    {['id', 'base_name', 'cname', 'url', 'info', 'ws_url', 'params', 'reg_date'].map(key => {
+                     if (key !== 'reg_date') return <TableCell key={key}>{el[key]}</TableCell>
+                     else return <TableCell key={key}>{moment.unix(el['reg_date']).format('DD/MM/YYYY')}</TableCell>
+                     })}
                 <TableCell><button onClick={() => {
                     localStorage.setItem("id", el.id);
                     navigate("../access", { replace: true });

@@ -31,7 +31,7 @@ async function update(props)
     }
     catch(err)
     {
-        console.log(err);
+        return  {error:err};
     }
     
 }

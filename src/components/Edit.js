@@ -22,7 +22,6 @@ export default function Edit({elem, setPopUpEdit, setResult}) {
         {
           navigate("../login", { replace: true });
         }
-        console.log(data);
     }
 
     return (

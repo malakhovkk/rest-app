@@ -31,7 +31,7 @@ async function update_access(props)
     }
     catch(err)
     {
-        console.log(err);
+        return  {error:err};
     }
     
 }

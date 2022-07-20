@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import {login} from '../api/login';
 import {useState, } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Paper } from '@mui/material';
 function LogIn(props) {
   
     const [name,setName] = useState('');
@@ -15,8 +16,6 @@ async function login_action(e){
         e.preventDefault();
         //console.log(name, password);
         token =  await login(name, password);
-        console.log("aa");
-        console.log(token);
         localStorage.setItem('token', token);
         navigate("../clients", { replace: true });
         //history.replace('/clients');
@@ -24,13 +23,20 @@ async function login_action(e){
 
   return (
     <div className={styles.login}>
+      <div className={styles.myforma}>
     <form onSubmit={login_action}>
+      <p className={styles.company}>
+      Компания ЮСИЭС сервис<br/>
+Система лицензирования
+
+      </p>
     <TextField
     required
     id="outlined-required"
     label="Login"
     defaultValue=""
     value={name}
+    style={{'width':'300px'}}
     onChange={(e) => setName(e.target.value)}
   />
    <TextField
@@ -41,14 +47,15 @@ async function login_action(e){
           autoComplete="current-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          style={{'marginTop':'20px'}}
+          style={{'marginTop':'20px', 'width':'300px'}}
         />
-    <Button variant="contained" type="submit"  size="large" style={{'marginTop':'30px'}}>
+    <Button variant="contained" type="submit"  size="large" style={{'marginTop':'30px', 'width':'300px'}}>
           Войти
         </Button>
         </form>
+        </div>
   </div>
-  );
+    );
 }
 
 export default LogIn;

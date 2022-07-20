@@ -23,7 +23,7 @@ export default function Add({setPopUpAdd, setResult, id}) {
         {
                 navigate("../login", { replace: true });
         }
-        console.log(data);
+       
     }
     let arr = ['orig_name', 'access_id','pwd', 'info','prop'];
     return (
@@ -36,7 +36,7 @@ export default function Add({setPopUpAdd, setResult, id}) {
             <option value="tAdmin">tAdmin</option>
           </select>
       {arr.map(el =>  <TextField style={{width:"300px"}} id="standard-basic" label={el} variant="standard"  value={info[el]} onChange={(e) => setInfo({...info, [el]:e.target.value})} type="text"/>)}
-       {console.log(arr)}
+       
     
         
           <Button type="submit" style={{marginTop:"40px",marginBottom:"20px" }}   className={styles.submit1} variant="contained">Сохранить</Button>

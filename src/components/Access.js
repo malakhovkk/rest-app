@@ -50,12 +50,12 @@ function Access() {
             //     }
             //     setInfo(title);
             // }
-            console.log(res);
+            // console.log(res);
             setResult(res);
         }
         func();
     },[]);
-    console.log(result);
+    // console.log(result);
     return result && (
     //   <table> <tr>{Object.keys(result[0]).map((el,i)=><th key={i}>{el}</th>)}</tr>
     //         {result.map(el=>
@@ -76,14 +76,14 @@ function Access() {
             <TableHead>
                 <TableRow>
                 
-                {Object.keys(result[0]).map((el,i)=><TableCell align="center" key={i}>{el}</TableCell>)}
+                {['type_id', 'orig_name', 'access_id', 'pwd', 'info', 'prop', 'id'].map((el,i)=><TableCell align="center" key={i}>{el}</TableCell>)}
                 </TableRow>
 
             </TableHead>
             <TableBody>
                 
                 {result.map(el=>
-                <TableRow key={el.id}>{Object.keys(result[0]).map(key => <TableCell key={key}>{el[key]}</TableCell>)}
+                <TableRow key={el.id}>{['type_id', 'orig_name', 'access_id', 'pwd', 'info', 'prop', 'id'].map(key => <TableCell key={key}>{el[key]}</TableCell>)}
                 <div className={styles.edit}> <EditIcon onClick={() => { setPopUpEdit(true); setEdit(el);}} className={styles.edit_icon}/></div>
                 </TableRow>
                 )}
