@@ -17,6 +17,7 @@ import Add from './Add';
 import AddIcon from '@mui/icons-material/Add';
 import { Tab } from '@mui/material';
 import moment from 'moment';
+import TextField from '@mui/material/TextField';
 
 function Clients() {
     let navigate = useNavigate();
@@ -26,9 +27,45 @@ function Clients() {
     const [Edit_, setEdit] = useState(null);
     const [Add_, setAdd] = useState(null);
     const [PopUpEdit, setPopUpEdit] = useState(true);
+    const [find_base, setFindBase] = useState("");
+    const [find_c, setFindC] = useState("");
+    const [info, setInfo] = useState();
+    function find_baseChange(e)
+    {
+        setFindBase(e.target.value);
+    }
+
+    function find_cChange(e)
+    {
+        setFindC(e.target.value);
+    }
+
     async function showPopUpCreate(){
         setPopUpCreate(true);
     }
+
+    function searachAll(find, row,  _result)
+    {
+        const res = _result.filter(el => el[row].search(find) !== -1);
+        setInfo(res);
+    }
+
+    useEffect(()=>{
+        if(find_base === '' && find_c === '') setInfo(result);
+        if(find_base !== '')
+        {
+            setFindC("");
+            searachAll(find_base, "base_name", result);
+        }
+    },[find_base])
+    useEffect(()=>{
+        if(find_base === '' && find_c === '') setInfo(result);
+        if(find_c !== '')
+        {
+            setFindBase("");
+            searachAll(find_c, "cname", result);
+        }
+    },[find_c])
 
     useEffect(() =>{
         async function func(){
@@ -51,6 +88,7 @@ function Clients() {
             // }
             // console.log(res);
             setResult(res);
+            setInfo(res);
         }
         func();
     },[]);
@@ -59,7 +97,7 @@ function Clients() {
     else style = styles.bigtable2;
     // console.log(result);
     // result[0].status = 0;
-    return result && (
+    return info && (
     //   <table> <tr>{Object.keys(result[0]).map((el,i)=><th key={i}>{el}</th>)}</tr>
     //         {result.map(el=>
     //         <tr key={el.id}>{Object.keys(result[0]).map(key => <td>{el[key]}</td>)}</tr>
@@ -79,7 +117,20 @@ function Clients() {
         Список пользователей:
     </h2></div>
     }
-    <TableContainer  className={style} component={Paper}>
+    <div className={style}>
+    <TextField
+        id="outlined-name"
+        label="Поиск по base_name"
+        value={find_base}
+        onChange={find_baseChange}
+    />
+    <TextField
+        id="outlined-name"
+        label="Поиск по cname"
+        value={find_c}
+        onChange={find_cChange}
+    />
+    <TableContainer   component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
                 <TableRow>
@@ -91,7 +142,7 @@ function Clients() {
             </TableHead>
             <TableBody>
                 
-                {result.map(el=>
+                {info.map(el=>
                 <TableRow className={styles.row} key={el.id}>
                     {['id', 'base_name', 'cname', 'url', 'info', 'ws_url', 'params', 'reg_date'].map(key => {
                      if (key !== 'reg_date') return <TableCell key={key}>{el[key]}</TableCell>
@@ -109,6 +160,7 @@ function Clients() {
             </TableBody>
         </Table>
     </TableContainer>
+    </div>
     </>
     );
 }

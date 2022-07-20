@@ -83,7 +83,7 @@ function Access() {
             <TableBody>
                 
                 {result.map(el=>
-                <TableRow key={el.id}>{['type_id', 'orig_name', 'access_id', 'pwd', 'info', 'prop', 'id'].map(key => <TableCell key={key}>{el[key]}</TableCell>)}
+                <TableRow className={styles.row} key={el.id}>{['type_id', 'orig_name', 'access_id', 'pwd', 'info', 'prop', 'id'].map(key => <TableCell key={key}>{el[key]}</TableCell>)}
                 <div className={styles.edit}> <EditIcon onClick={() => { setPopUpEdit(true); setEdit(el);}} className={styles.edit_icon}/></div>
                 </TableRow>
                 )}
