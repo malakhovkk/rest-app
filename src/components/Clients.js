@@ -18,6 +18,8 @@ import AddIcon from '@mui/icons-material/Add';
 import { Tab } from '@mui/material';
 import moment from 'moment';
 import TextField from '@mui/material/TextField';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 
 function Clients() {
     let navigate = useNavigate();
@@ -30,6 +32,9 @@ function Clients() {
     const [find_base, setFindBase] = useState("");
     const [find_c, setFindC] = useState("");
     const [info, setInfo] = useState();
+    const [base_name, setBaseName] = useState(true);
+    const [cname, setCName] = useState(true);
+
     function find_baseChange(e)
     {
         setFindBase(e.target.value);
@@ -49,6 +54,72 @@ function Clients() {
         const res = _result.filter(el => el[row].search(find) !== -1);
         setInfo(res);
     }
+    useEffect(()=>{
+        if(info)
+        {
+            let res;
+            if(base_name)
+            {
+                res = info.sort(function(a, b){
+                    if (a.base_name < b.base_name) {
+                        return -1;
+                      }
+                      if (a.base_name > b.base_name) {
+                        return 1;
+                      }
+                      return 0;
+                })
+            }
+            else
+            {
+                res = info.sort(function(a, b){
+                    if (a.base_name < b.base_name) {
+                        return 1;
+                      }
+                      if (a.base_name > b.base_name) {
+                        return -1;
+                      }
+                      return 0;
+                })
+            }
+            setResult(res);
+            setInfo(res);
+        }
+    },[base_name])
+
+    useEffect(()=>{
+        if(info)
+        {
+            let res;
+            if(cname)
+            {
+                res = info.sort(function(a, b){
+                    if (a.cname < b.cname) {
+                        return -1;
+                      }
+                      if (a.cname > b.cname) {
+                        return 1;
+                      }
+                      return 0;
+                })
+            }
+            else
+            {
+                res = info.sort(function(a, b){
+                    if (a.cname < b.cname) {
+                        return 1;
+                      }
+                      if (a.cname > b.cname) {
+                        return -1;
+                      }
+                      return 0;
+                })
+            }
+            console.log(res);
+            setResult(res);
+            setInfo(res);
+        }
+    },[cname])
 
     useEffect(()=>{
         if(find_base === '' && find_c === '') setInfo(result);
@@ -135,7 +206,15 @@ function Clients() {
             <TableHead>
                 <TableRow>
                 
-                {['id', 'base_name', 'cname', 'url', 'info', 'ws_url', 'params', 'reg_date'].map((el,i)=><TableCell align="center" key={i}>{el}</TableCell>)}
+                {['id', 'base_name', 'cname', 'url', 'info', 'ws_url', 'params', 'reg_date'].map((el,i)=>{
+                if(el !== 'base_name' && el !== 'cname')
+                    return <TableCell align="center" key={i}>{el}</TableCell>
+                else 
+                    if (el === 'base_name')
+                        return <TableCell onClick={() => setBaseName(!base_name)} align="center" key={i}>{el}{base_name ? <ArrowUpwardIcon/> : <ArrowDownwardIcon/>}</TableCell>
+                    else 
+                        return <TableCell onClick={() => setCName(!cname)} align="center" key={i}>{el}{cname ? <ArrowUpwardIcon/> : <ArrowDownwardIcon/>}</TableCell>
+                })}
                 <TableCell>Access</TableCell>
                 </TableRow>
 
