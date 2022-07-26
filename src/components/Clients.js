@@ -35,6 +35,7 @@ function Clients() {
     const [base_name, setBaseName] = useState(true);
     const [cname, setCName] = useState(true);
 
+    
     function find_baseChange(e)
     {
         setFindBase(e.target.value);
@@ -140,6 +141,11 @@ function Clients() {
 
     useEffect(() =>{
         async function func(){
+            // setBaseName(_ => {
+            //     setCName(true);
+            //     return true;
+            // });
+            
             let res =  await clients();
             if(res.error)
             {
@@ -227,10 +233,10 @@ function Clients() {
                      if (key !== 'reg_date') return <TableCell key={key}>{el[key]}</TableCell>
                      else return <TableCell key={key}>{moment.unix(el['reg_date']).format('DD/MM/YYYY')}</TableCell>
                      })}
-                <TableCell><button onClick={() => {
+                <TableCell><Button variant="outlined" onClick={() => {
                     localStorage.setItem("id", el.id);
                     navigate("../access", { replace: true });
-                    }}>Показать</button></TableCell>
+                    }}>Показать</Button></TableCell>
                 <div className={styles.edit}> <EditIcon onClick={() => { setPopUpEdit(true); setEdit(el);}} className={styles.edit_icon}/></div>
                     <AddIcon className={styles.add} onClick={() => {setPopUpAdd(true); setAdd(el);}}/>
                 </TableRow>
